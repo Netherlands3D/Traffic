@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Netherlands3D.Events;
 using TMPro;
 using System.Linq;
 
@@ -61,13 +60,13 @@ namespace Netherlands3D.Traffic.VISSIM
         private void OnEnable()
         {
             dataDatabase.OnAddData.AddListener(OnAddData);
-            sso.eventSimulationSpeedChanged.AddListenerStarted(OnSimulationSpeedChange);
+            sso.eventSimulationSpeedChanged.AddListener(OnSimulationSpeedChange);
         }
 
         private void OnDisable()
         {
             dataDatabase.OnAddData.RemoveListener(OnAddData);
-            sso.eventSimulationSpeedChanged.RemoveListenerStarted(OnSimulationSpeedChange);
+            sso.eventSimulationSpeedChanged.RemoveListener(OnSimulationSpeedChange);
         }
 
         private void Start()

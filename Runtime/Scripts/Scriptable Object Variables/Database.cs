@@ -135,7 +135,13 @@ namespace Netherlands3D.Traffic.VISSIM
         public void AddSignalHeads(Dictionary<int, SignalHeadData> signalHeads, bool triggerRefresh = true)
         {
             Debug.Log(string.Format("[VISSIM] Adding {0} signalHeads", signalHeads.Count)); 
-            this.signalHeads.AddRange(signalHeads);
+
+            foreach (var signalhead in signalHeads)
+            {
+                this.signalHeads.Add(signalhead.Key, signalhead.Value);
+            }
+
+            // this.signalHeads.AddRange(signalHeads);
             if(triggerRefresh)
             {
                 OnDataChanged.Invoke();

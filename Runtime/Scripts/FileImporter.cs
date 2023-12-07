@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-using Netherlands3D.Events;
+using UnityEngine.Events;
 
 namespace Netherlands3D.Traffic.VISSIM
 {
@@ -20,26 +20,26 @@ namespace Netherlands3D.Traffic.VISSIM
 
         [Header("Components")]
         [Tooltip("Event that fires when files are imported")]
-        [SerializeField] private StringEvent eventFilesImported;
+        [SerializeField] private UnityEvent<string> eventFilesImported;
         [Tooltip("Event that fires when the database needs to be cleared")]
-        [SerializeField] private BoolEvent eventClearDatabase;
+        [SerializeField] private UnityEvent<bool> eventClearDatabase;
         [Tooltip("The loading process expressed in a float ranging 0 to 1 with 1 being completed")]
         /// <remarks>
         /// Currently only displays the progress of files being loaded (x of total), if it where to show on what line it is off the file it would slow down the loading alot
         /// Would need to create a more raw loading float that invokes every x lines of a file
         /// </remarks>
-        [SerializeField] private FloatEvent eventLoadingProgress;
+        [SerializeField] private UnityEvent<float> eventLoadingProgress;
         [Tooltip("The database holding 'Data' classes")]
         [SerializeField] private Database dataBase;
 
         private void OnEnable()
         {
-            eventFilesImported.AddListenerStarted(Load);
+            eventFilesImported.AddListener(Load);
         }
 
         private void OnDisable()
         {
-            eventFilesImported.RemoveListenerStarted(Load);
+            eventFilesImported.RemoveListener(Load);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Netherlands3D.Traffic.VISSIM
 
             // Loading event
             int fileIndex = 1;
-            eventLoadingProgress.InvokeStarted(0.001f);
+            eventLoadingProgress.Invoke(0.001f);
             yield return new WaitForEndOfFrame();
 
             // Check if there are multiple files
@@ -119,12 +119,12 @@ namespace Netherlands3D.Traffic.VISSIM
                         break;
                 }
 
-                eventLoadingProgress.InvokeStarted(fileIndex / paths.Length);
+                eventLoadingProgress.Invoke(fileIndex / paths.Length);
                 yield return new WaitForEndOfFrame();
                 fileIndex++;
             }
 
-            eventClearDatabase.InvokeStarted(true);
+            eventClearDatabase.Invoke(true);
             sw.Stop();
             if(showDebugLog) UnityEngine.Debug.Log(string.Format("[Traffic File Importer] Loaded {0} file(s) in {1}ms", paths.Length - failedFiles, sw.ElapsedMilliseconds));
             yield break;

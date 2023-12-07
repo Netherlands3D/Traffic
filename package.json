@@ -1,12 +1,12 @@
 {
-  "name": "eu.netherlands3d.{NAME:kebab-case}",
-  "version": "{VERSION}",
-  "displayName": "Netherlands3D - {DISPLAY_NAME}",
-  "description": "{DESCRIPTION}",
+  "name": "eu.netherlands3d.traffic",
+  "version": "0.0.1",
+  "displayName": "Netherlands3D - Traffic",
+  "description": "Traffic",
   "unity": "2022.2",
   "documentationUrl": "https://netherlands3d.eu/docs",
-  "changelogUrl": "https://raw.githubusercontent.com/Netherlands3D/{REPOSITORY_NAME}/main/CHANGELOG.md",
-  "licensesUrl": "https://raw.githubusercontent.com/Netherlands3D/{REPOSITORY_NAME}/main/LICENSE.txt",
+  "changelogUrl": "https://raw.githubusercontent.com/Netherlands3D/Traffic/main/CHANGELOG.md",
+  "licensesUrl": "https://raw.githubusercontent.com/Netherlands3D/Traffic/main/LICENSE.txt",
   "keywords": [
     "digital-twin"
   ],

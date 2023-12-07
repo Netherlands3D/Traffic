@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Netherlands3D.TileSystem;
-using Netherlands3D.Core;
+using Netherlands3D.CartesianTiles;
 
 namespace Netherlands3D.Traffic
 {
@@ -108,10 +107,10 @@ namespace Netherlands3D.Traffic
 
             // So
             this.so = so;
-            this.so.eventUpdateRealtime.AddListenerStarted(OnUpdateRealtimeChanged);
-            this.so.eventSimulationTimeChanged.AddListenerStarted(OnSimulationTimeChanged);
-            this.so.eventSimulationSpeedChanged.AddListenerStarted(OnSimulationSpeedChanged);
-            this.so.eventSimulationStateChanged.AddListenerStarted(OnSimulationStateChanged);
+            this.so.eventUpdateRealtime.AddListener(OnUpdateRealtimeChanged);
+            this.so.eventSimulationTimeChanged.AddListener(OnSimulationTimeChanged);
+            this.so.eventSimulationSpeedChanged.AddListener(OnSimulationSpeedChanged);
+            this.so.eventSimulationStateChanged.AddListener(OnSimulationStateChanged);
 
             // Layer masks
             this.layerMask = layerMask;
@@ -159,10 +158,10 @@ namespace Netherlands3D.Traffic
         {
             if(data != null)
             {
-                so.eventUpdateRealtime.RemoveListenerStarted(OnUpdateRealtimeChanged);
-                so.eventSimulationTimeChanged.RemoveListenerStarted(OnSimulationTimeChanged);
-                so.eventSimulationSpeedChanged.RemoveListenerStarted(OnSimulationSpeedChanged);
-                so.eventSimulationStateChanged.RemoveListenerStarted(OnSimulationStateChanged);
+                so.eventUpdateRealtime.RemoveListener(OnUpdateRealtimeChanged);
+                so.eventSimulationTimeChanged.RemoveListener(OnSimulationTimeChanged);
+                so.eventSimulationSpeedChanged.RemoveListener(OnSimulationSpeedChanged);
+                so.eventSimulationStateChanged.RemoveListener(OnSimulationStateChanged);
             }
         }
 

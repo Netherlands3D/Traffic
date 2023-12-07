@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Netherlands3D.Events;
+using UnityEngine.Events;
+
 
 namespace Netherlands3D.Traffic
 {
@@ -20,7 +21,7 @@ namespace Netherlands3D.Traffic
             set
             {
                 this.value = value;
-                if(Application.isPlaying && onValueChanged != null) onValueChanged.InvokeStarted(value);
+                if(Application.isPlaying && onValueChanged != null) onValueChanged.Invoke(value);
             }
         }
 
@@ -36,7 +37,7 @@ namespace Netherlands3D.Traffic
         /// <summary>
         /// Float event that gets invoked when Value changes
         /// </summary>
-        public IntEvent onValueChanged;
+        public UnityEvent<int> onValueChanged;
 
         private void OnValidate()
         {

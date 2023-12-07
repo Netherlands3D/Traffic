@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Netherlands3D.Events;
+using UnityEngine.Events;
+
 
 namespace Netherlands3D.Traffic
 {
@@ -13,13 +14,13 @@ namespace Netherlands3D.Traffic
     public class SSO : ScriptableObject
     {
         [Tooltip("If the entity should update itself in realtime on enviroment")]
-        public BoolEvent eventUpdateRealtime;
+        public UnityEvent<bool> eventUpdateRealtime;
         [Tooltip("Event that gets triggerd if the simulation time changes")]
-        public FloatEvent eventSimulationTimeChanged;
+        public UnityEvent<float> eventSimulationTimeChanged;
         [Tooltip("Event that gets triggerd if the simulation speed changes")]
-        public FloatEvent eventSimulationSpeedChanged;
+        public UnityEvent<float> eventSimulationSpeedChanged;
         [Tooltip("Event that gets triggerd if the simulation state changes")]
-        public IntEvent eventSimulationStateChanged;
+        public UnityEvent<int> eventSimulationStateChanged;
         [Tooltip("The current VISSIM simulation time starting from 0 - infinity")]
         public FloatVariable simulationTime;
         [Tooltip("The speed multiplier to how fast the simulation is running. 1 = normal")]
@@ -27,7 +28,7 @@ namespace Netherlands3D.Traffic
         [Tooltip("The state of the simulation time and how it gets updated. 0 = paused, 1 = play, -1 = reversed, -2 = reset")]
         public IntVariable simulationState;
 
-        public SSO(FloatEvent eventSimulationTimeChanged, FloatEvent eventSimulationSpeedChanged, IntEvent eventSimulationStateChanged, FloatVariable simulationTime, FloatVariable simulationSpeed, IntVariable simulationState)
+        public SSO(UnityEvent<float> eventSimulationTimeChanged, UnityEvent<float> eventSimulationSpeedChanged, UnityEvent<int> eventSimulationStateChanged, FloatVariable simulationTime, FloatVariable simulationSpeed, IntVariable simulationState)
         {
             this.eventSimulationTimeChanged = eventSimulationTimeChanged;
             this.eventSimulationSpeedChanged = eventSimulationSpeedChanged;

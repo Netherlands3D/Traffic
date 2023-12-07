@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Netherlands3D.Coordinates;
 using UnityEngine;
-using Netherlands3D.Core;
 using SimpleJSON;
 
 namespace Netherlands3D.Traffic.Simulation

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Netherlands3D.Events;
 using System;
+using System.Linq;
+
 
 namespace Netherlands3D.Traffic.VISSIM
 {
@@ -34,7 +35,7 @@ namespace Netherlands3D.Traffic.VISSIM
         {
             if(data != null)
             {
-                sso.eventSimulationTimeChanged.RemoveListenerStarted(OnSimulationTimeChanged);
+                sso.eventSimulationTimeChanged.RemoveListener(OnSimulationTimeChanged);
             }
         }
 
@@ -47,15 +48,15 @@ namespace Netherlands3D.Traffic.VISSIM
             name = "Signal Head " + data.groupID;
 
             // Add listeners
-            sso.eventSimulationTimeChanged.AddListenerStarted(OnSimulationTimeChanged);
+            sso.eventSimulationTimeChanged.AddListener(OnSimulationTimeChanged);
         }
 
         private void OnSimulationTimeChanged(float value)
         {
             if(data == null || data.schedule == null || data.schedule.Count < 1) return;
             // Fetch the closest color index based on sim time
-            var k = ArrayExtention.MinBy(data.schedule, x => Math.Abs(x.Key - value));
-
+            // var k = ArrayExtention.MinBy(data.schedule, x => Math.Abs(x.Key - value));
+            var k = data.schedule.OrderBy(x => Math.Abs(x.Key - value)).First();
             switch(k.Value)
             {
                 case 0:

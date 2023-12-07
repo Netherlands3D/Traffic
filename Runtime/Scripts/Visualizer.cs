@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Netherlands3D.TileSystem;
 using System.Linq;
+using Netherlands3D.CartesianTiles;
+
 
 namespace Netherlands3D.Traffic.VISSIM
 {
@@ -20,7 +21,7 @@ namespace Netherlands3D.Traffic.VISSIM
                 updateEntitiesRealtime = value;
 
                 if(Application.isPlaying)
-                    sso.eventUpdateRealtime.InvokeStarted(value);
+                    sso.eventUpdateRealtime.Invoke(value);
             }
         }
 
@@ -88,7 +89,7 @@ namespace Netherlands3D.Traffic.VISSIM
             database.OnAddData.AddListener(UpdateEntities);
             database.OnSignalHeadsChanged.AddListener(UpdateSignalHeads);
             database.OnClear.AddListener(OnClear);
-            sso.eventSimulationStateChanged.AddListenerStarted(OnSimulationStateChanged);
+            sso.eventSimulationStateChanged.AddListener(OnSimulationStateChanged);
         }
 
         private void OnDisable()
@@ -96,7 +97,7 @@ namespace Netherlands3D.Traffic.VISSIM
             database.OnAddData.RemoveListener(UpdateEntities);
             database.OnSignalHeadsChanged.RemoveListener(UpdateSignalHeads);
             database.OnClear.RemoveListener(OnClear);
-            sso.eventSimulationStateChanged.RemoveListenerStarted(OnSimulationStateChanged);
+            sso.eventSimulationStateChanged.RemoveListener(OnSimulationStateChanged);
         }
 
         private void Awake()
