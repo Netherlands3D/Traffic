@@ -11,12 +11,17 @@ namespace Netherlands3D.Traffic
     /// </summary>
     [AddComponentMenu("Netherlands3D/Traffic/Traffic Entity")] // Used to change the script inspector name
     [RequireComponent(typeof(Animation))]
+
+
     public class Entity : MonoBehaviour
     {
         /// <summary>
         /// Static raycasthit used by entities
         /// </summary>
         public static RaycastHit Hit;
+
+        public float speed = 5f;
+        public float rotationSpeed = 200f;
 
         /// <summary>
         /// The data for the entity
@@ -101,6 +106,16 @@ namespace Netherlands3D.Traffic
         /// </summary>
         /// <param name="data">Data of the entity</param>
         /// <param name="so">EntityScriptableObjects</param>
+        /// 
+
+        public void Update()
+        {
+            // Move the entity forward
+            transform.position += transform.forward * speed * Time.deltaTime;
+
+            // Rotate the entity based on its direction
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(transform.forward, Vector3.up), rotationSpeed * Time.deltaTime);
+        }
         public void Initialize(Data data, SSO so, LayerMask layerMask, bool updateRealtime = false, BinaryMeshLayer binaryMeshLayer = null)
         {
             this.data = data;
