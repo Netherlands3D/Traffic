@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Netherlands3D.CartesianTiles;
+using System;   
+
 
 namespace Netherlands3D.Traffic
+
 {
     /// <summary>
     /// Base class for all Traffic entities (example car, truck, bike etc)
@@ -14,15 +17,20 @@ namespace Netherlands3D.Traffic
 
 
     public class Entity : MonoBehaviour
-    {
+   {
         /// <summary>
         /// Static raycasthit used by entities
         /// </summary>
         public static RaycastHit Hit;
-
         public float speed = 5f;
-        public float rotationSpeed = 200f;
 
+
+        
+
+
+         
+
+        
         /// <summary>
         /// The data for the entity
         /// </summary>
@@ -108,14 +116,53 @@ namespace Netherlands3D.Traffic
         /// <param name="so">EntityScriptableObjects</param>
         /// 
 
-        public void Update()
-        {
-            // Move the entity forward
-            transform.position += transform.forward * speed * Time.deltaTime;
 
-            // Rotate the entity based on its direction
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(transform.forward, Vector3.up), rotationSpeed * Time.deltaTime);
+
+
+     
+        void Update()
+        {
+            // Add basic forward movement based on the traffic conditions
+            if (IsGreenLight()) // Call your own method that determines the green light status
+            {
+                GoVehicle(); // Signal the vehicle to go forward
+                MoveForward(); // Move the vehicle forward
+            }
+            else
+            {
+                StopVehicle(); // Signal the vehicle to stop
+            }
         }
+
+        public void StopVehicle()
+        {
+            speed = 0f;
+            // Optionally, play a sound or animation indicating the stop
+        }
+
+        public void GoVehicle()
+        {
+            speed = 5f; // Set the desired speed
+            // Resume vehicle movement
+        }
+
+        public void MoveForward()
+        {
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
+
+        // Example method to determine if the traffic light is green (Replace this with your own logic)
+        private bool IsGreenLight()
+        {
+            // Your logic to check if the traffic light is green
+            // Example logic:
+            // return true; // If it's green
+            // return false; // If it's not green
+            return false; // Default to false for demonstration purposes
+        }
+
+    
+              
         public void Initialize(Data data, SSO so, LayerMask layerMask, bool updateRealtime = false, BinaryMeshLayer binaryMeshLayer = null)
         {
             this.data = data;
@@ -404,7 +451,7 @@ namespace Netherlands3D.Traffic
                     Gizmos.color = Color.blue;
                     Gizmos.DrawLine(item.Value.center, item.Value.center + item.Value.direction * 2);
                 }
-
+        
                 // Draw bounding box
                 Matrix4x4 m = Gizmos.matrix;
                 Gizmos.matrix = transform.localToWorldMatrix;

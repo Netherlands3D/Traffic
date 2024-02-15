@@ -41,6 +41,12 @@ namespace Netherlands3D.Traffic.Simulation
             }
         }
 
+        public void direction()
+        {
+            double latitude = 0.0;
+            double longitude = 0.0;
+        }
+
         /// <summary>
         /// A road point
         /// </summary>
