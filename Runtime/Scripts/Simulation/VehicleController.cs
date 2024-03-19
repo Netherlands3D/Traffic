@@ -1,8 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Netherlands3D.Traffic.Simulation;
 
-public class VehicleController : MonoBehaviour
+
+namespace Netherlands3D.Traffic.Simulation
+{
+    public class VehicleController : MonoBehaviour
 {
     public List<Transform> waypoints; // List of waypoints for the vehicle to follow
     private int currentWaypointIndex = 0; // Index of the current waypoint the vehicle is heading towards
@@ -134,4 +138,5 @@ public class VehicleController : MonoBehaviour
         Debug.Log("GoVehicle method called");
         isMoving = true;
     }
+}
 }

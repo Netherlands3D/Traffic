@@ -1,17 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Netherlands3D.Coordinates;
+using SimpleJSON;
+using System.Linq;
+using Netherlands3D.Traffic.Simulation;
+using System;
 
-public class WaypointContainer : MonoBehaviour
+
+namespace Netherlands3D.Traffic.Simulation
 {
-    public List<Transform> waypoints;
-
-    private void Awake()
+    public class WaypointContainer : MonoBehaviour
     {
-       foreach(Transform tr in gameObject.GetComponentsInChildren<Transform>())
+        public List<Transform> waypoints;
+
+        private void Awake()
         {
-          waypoints.Add(tr);
+            foreach(Transform tr in gameObject.GetComponentsInChildren<Transform>())
+            {
+                if (tr != transform) // Only add the child transforms
+                {
+                    waypoints.Add(tr);
+                }
+            }
         }
-        waypoints.Remove(waypoints[0]);
     }
 }

@@ -6,7 +6,7 @@ using Netherlands3D.CartesianTiles;
 using System;   
 
 
-namespace Netherlands3D.Traffic
+namespace Netherlands3D.Traffic.VISSIM
 
 {
     /// <summary>
@@ -17,18 +17,12 @@ namespace Netherlands3D.Traffic
 
 
     public class Entity : MonoBehaviour
-   {
+    {
         /// <summary>
         /// Static raycasthit used by entities
         /// </summary>
         public static RaycastHit Hit;
         public float speed = 5f;
-
-
-        
-
-
-         
 
         
         /// <summary>
