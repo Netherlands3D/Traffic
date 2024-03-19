@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class Path : MonoBehaviour
+
+namespace Netherlands3D.Traffic.Simulation
+{
+    public class Path : MonoBehaviour
 {
     [SerializeField] Transform[] Points;
     [SerializeField] private float moveSpeed = 5f;
@@ -41,3 +44,5 @@ public class Path : MonoBehaviour
         }
     }
 }
+}
+

@@ -2,9 +2,12 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Netherlands3D.Traffic.Simulation;
 
-public class TrafficLight : MonoBehaviour
+namespace Netherlands3D.Traffic.Simulation
 {
+    public class TrafficLight : MonoBehaviour
+    {
     public enum LightColor { Red, Yellow, Green }
     public LightColor currentColor = LightColor.Red;
     public event Action<LightColor> OnLightChanged;
@@ -131,4 +134,6 @@ public class TrafficLight : MonoBehaviour
             }
         }
     }
+}
+
 }

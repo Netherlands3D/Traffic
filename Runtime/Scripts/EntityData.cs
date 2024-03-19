@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Netherlands3D.Traffic.VISSIM;
 
-namespace Netherlands3D.Traffic
+namespace Netherlands3D.Traffic.VISSIM
 {
     /// <summary>
     /// An scriptable object containing data for its VISSIM entity (Example a human, car, truck, bus etc.)
